@@ -1,22 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "GitPod NTNU",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal GitPod NTNU wrapper based on Electron",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/haryp2309/GitPod-NTNU-Unofficial-Electron",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "GitPod",
+    "NTNU"
   ],
-  "author": "GitHub",
+  "author": "haryp2309",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.5"
+    "electron": "^10.1.5",
+    "electron-packager": "^15.1.0"
   }
 }

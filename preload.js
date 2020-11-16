@@ -10,3 +10,10 @@ window.addEventListener('DOMContentLoaded', () => {
     replaceText(`${type}-version`, process.versions[type])
   }
 })
+
+// TODO
+/* window.webContents.openDevTools()
+window.webContents.on('did-finish-load', () => {
+  window.webContents.executeJavaScript('if (document.getElementById("theia-top-panel") != null) {document.getElementById("theia-top-panel").style.paddingLeft = "60px"}')
+
+}) */

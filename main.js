@@ -1,30 +1,48 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
-function createWindow () {
+function createWindow() {
+  createSpecificWindow('https:///gitpod.idi.ntnu.no')
+}
+
+function createSpecificWindow(urlToLoad) {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 800,
     height: 600,
+    icon: __dirname + '/media/AppIcon.icns',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadURL(urlToLoad)
+
+  mainWindow.webContents.insertCSS('#theia-top-panel { padding-left: 60px; -webkit-app-region: drag; } body header { -webkit-app-region: drag; }')
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.insertCSS('#theia-top-panel { padding-left: 60px; -webkit-app-region: drag; } body header { -webkit-app-region: drag; }')
+  })
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault()
+    createSpecificWindow(url)
+  })
+
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow()
-  
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
