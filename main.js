@@ -21,20 +21,40 @@ function createSpecificWindow(urlToLoad) {
   // and load the index.html of the app.
   mainWindow.loadURL(urlToLoad)
 
-  mainWindow.webContents.insertCSS('#theia-top-panel { padding-left: 60px; -webkit-app-region: drag; } body header { -webkit-app-region: drag; }')
+  
 
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.insertCSS('#theia-top-panel { padding-left: 60px; -webkit-app-region: drag; } body header { -webkit-app-region: drag; }')
-  })
+
+
+  mainWindow.on('resize', (event) =>{
+    updateCSS(mainWindow)
+  });
+
+   mainWindow.webContents.on('did-finish-load', () => {
+    updateCSS(mainWindow)
+  }) 
   mainWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault()
     createSpecificWindow(url)
   })
 
+  mainWindow.webContents.on('zoom-changed', (event) => {
+    updateCSS(mainWindow)
+  })
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
+
+function updateCSS(window) {
+  var zoomFactor = window.webContents.getZoomFactor()
+  var theiaPadding = 60/zoomFactor
+  if (window.isFullScreen()) {
+    window.webContents.insertCSS('#theia-top-panel { padding-left: 0px; -webkit-app-region: drag; } header { -webkit-app-region: drag; }')
+  } else {
+    window.webContents.insertCSS('#theia-top-panel { padding-left: '+theiaPadding+'px; -webkit-app-region: drag; } header { -webkit-app-region: drag; }')
+  }
+}
+
 
 
 // This method will be called when Electron has finished
