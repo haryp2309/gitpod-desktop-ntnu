@@ -1,2 +1,2 @@
 # Electron app for GitPod NTNU
-Wraps GitPod into a local browser without the need for a browser.
+Desktop app for GitPod (within the NTNU domain) based on electron. This app is deprecated for now. 
