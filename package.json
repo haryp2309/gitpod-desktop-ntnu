@@ -15,7 +15,7 @@
   "author": "haryp2309",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^16.0.2",
+    "electron": "^18.2.3",
     "electron-packager": "^15.1.0"
   }
 }
